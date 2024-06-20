@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # GitHub API URL
 API_URL="https://api.github.com"
 
@@ -26,7 +27,6 @@ function list_users_with_read_access {
 
     # Fetch the list of collaborators on the repository
     collaborators="$(github_api_get "$endpoint" | jq -r '.[] | select(.permissions.pull == true) | .login')"
-
     # Display the list of collaborators with read access
     if [[ -z "$collaborators" ]]; then
         echo "No users with read access found for ${REPO_OWNER}/${REPO_NAME}."
@@ -36,7 +36,18 @@ function list_users_with_read_access {
     fi
 }
 
+#helper function
+#function helper { 
+#	expected_cmd_arg=2
+#	if [ $# -ne $expected_cmd_arg ]; then
+#		echo "please enter the correct arguments"
+#	fi
+#	}
+
+
 # Main script
+
+#helper "$@"
 
 echo "Listing users with read access to ${REPO_OWNER}/${REPO_NAME}..."
 list_users_with_read_access
